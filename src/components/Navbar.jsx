@@ -1,30 +1,30 @@
 import React from 'react'
 import logo from '../assets/logo_gr.png'
-
+import { Link, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+  const navigate = useNavigate()
+
   return (
     <nav>
-      <div class="nav__header">
-        <div class="nav__logo">
-          <a href="#">
+      <div className="nav__header">
+        <div className="nav__logo">
+          <Link to="/">
             <img src={logo} alt="logo" />
-          </a>
+          </Link>
         </div>
-        <div class="nav__menu__btn" id="menu-btn">
-          <i class="ri-menu-3-line"></i>
+        <div className="nav__menu__btn" id="menu-btn">
+          <i className="ri-menu-3-line"></i>
         </div>
       </div>
-      <ul class="nav__links" id="nav-links">
-        <li><a href="#home">Trang chủ</a></li>
+      <ul className="nav__links" id="nav-links">
+        <li><Link to="/">Trang chủ</Link></li>
         <li><a href="#blog">Blog cộng đồng</a></li>
         <li><a href="#mission">Nhiệm vụ xanh</a></li>
-        
-        
         <li>
-          <button class="btn">
+          <button className="btn" onClick={() => navigate('/donate')}>
             Quyên góp cho cộng đồng
-            <span><i class="ri-arrow-right-long-line"></i></span>
+            <span><i className="ri-arrow-right-long-line"></i></span>
           </button>
         </li>
       </ul>

@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 :root {
@@ -166,7 +167,7 @@ nav {
   margin-inline: auto;
   transform: rotate(-10deg);
 }
-
+.py-20px { padding-top: 20px; padding-bottom: 20px; }
 .header__content h1 {
   margin-bottom: 1.5rem;
   font-size: 4.5rem;
