@@ -3,7 +3,8 @@ import donate from '../assets/donate.jpg';
 
 const Donate = () => {
   const swiperRef = useRef(null);
-  
+  const swiperInstance = useRef(null);
+
   const slides = [
     {
       id: 1,
@@ -26,62 +27,43 @@ const Donate = () => {
   ];
 
   useEffect(() => {
-    // Initialize Swiper when component mounts
-    if (typeof window !== 'undefined' && window.Swiper && swiperRef.current) {
-      const swiper = new window.Swiper(swiperRef.current, {
-        loop: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        effect: 'slide',
-        speed: 500,
-        allowTouchMove: true,
-        grabCursor: true,
-        touchRatio: 1,
-        touchAngle: 45,
-        threshold: 10,
-      });
+    // Load Swiper CSS
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css';
+    document.head.appendChild(link);
 
-      return () => {
-        if (swiper) {
-          swiper.destroy();
-        }
-      };
-    }
-  }, []);
+    // Load Swiper JS
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js';
+    script.onload = () => {
+      if (swiperRef.current && window.Swiper) {
+        swiperInstance.current = new window.Swiper(swiperRef.current, {
+          loop: true,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+          },
+          effect: 'slide',
+          speed: 500,
+          allowTouchMove: true,
+          grabCursor: true,
+          touchRatio: 1,
+          touchAngle: 45,
+          threshold: 10,
+        });
+      }
+    };
+    document.head.appendChild(script);
 
-  // Fallback: Load Swiper.js if not available
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !window.Swiper) {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js';
-      script.onload = () => {
-        if (swiperRef.current) {
-          const swiper = new window.Swiper(swiperRef.current, {
-            loop: true,
-            autoplay: {
-              delay: 3000,
-              disableOnInteraction: false,
-            },
-            effect: 'slide',
-            speed: 500,
-            allowTouchMove: true,
-            grabCursor: true,
-            touchRatio: 1,
-            touchAngle: 45,
-            threshold: 10,
-          });
-        }
-      };
-      document.head.appendChild(script);
-
-      // Load CSS
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css';
-      document.head.appendChild(link);
-    }
+    // Cleanup
+    return () => {
+      if (swiperInstance.current) {
+        swiperInstance.current.destroy();
+      }
+      document.head.removeChild(link);
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (

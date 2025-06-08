@@ -46,12 +46,7 @@ const About = () => {
             </div>
           </div>
         </div>
-        <div class="destination__btn">
-          <button class="btn">
-            Xem tất cả
-            <span><i class="ri-arrow-right-long-line"></i></span>
-          </button>
-        </div>
+        
       </div>
     </section>
   );

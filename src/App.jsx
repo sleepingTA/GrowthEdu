@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import BlogPage from './pages/BlogPage';
 import Navbar from './components/Navbar';
-import Header from './components/Header';
-import About from './components/Story';
-import Mission from './components/Mission';
-import Destination from './components/About';
-import Review from './components/Review';
-import Blog from './components/Blog';
-import BannerGallery from './components/BannerGallery';
 import Footer from './components/Footer';
-import Donate from './components/Donate';
+import BlogDetail from './pages/BlogDetail';
+import Donate from './pages/Donation';
+import GreenMission from './pages/GreenMission';
 
 function App() {
   useEffect(() => {
@@ -61,13 +59,16 @@ function App() {
   return (
     <>
       <Navbar />
-      <Header />
-      <About />
-      <Mission />
-      <Destination />
-      <Donate />
-      <Blog />
-      <BannerGallery />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/mission" element={<GreenMission />} />
+          <Route path="/mission/:id" element={<GreenMission />} />
+        </Routes>
+
       <Footer />
     </>
   );
