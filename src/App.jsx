@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BlogDetail from './pages/BlogDetail';
 import Donate from './pages/Donation';
+import GreenMission from './pages/GreenMission';
 
 function App() {
   useEffect(() => {
@@ -64,6 +65,8 @@ function App() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/mission" element={<GreenMission />} />
+          <Route path="/mission/:id" element={<GreenMission />} />
         </Routes>
 
       <Footer />
