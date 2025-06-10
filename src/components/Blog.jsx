@@ -1,57 +1,55 @@
 import React from 'react';
-import Button from './Button';
 import blog1 from '../assets/blog-1.png';
 import blog2 from '../assets/blog-2.png';
 import blog3 from '../assets/blog-3.png';
-
 import { useNavigate } from 'react-router-dom';
 
 const Blog = () => {
   const navigate = useNavigate();
 
   return (
-    <section class="blog" id="blog">
-      <div class="section__container blog__container">
-        <h3 class="section__subheader">Blogs</h3>
-        <h2 class="section__header">Những tin tức và blog</h2>
-        <div class="blog__grid">
-          <div class="blog__card">
+    <section className="blog" id="blog">
+      <div className="section__container blog__container">
+        <h3 className="section__subheader">Blogs</h3>
+        <h2 className="section__header">Những tin tức và blog</h2>
+        <div className="blog__grid">
+          <div className="blog__card">
             <img src={blog1} alt="blog" />
-            <div class="blog__content">
+            <div className="blog__content">
               <h4>Trường xanh và những "người hùng" mang trong mình chiếc áo học sinh</h4>
-              <button class="btn">
+              <button className="btn" onClick={() => navigate('/blog/1')}>
                 Đọc thêm
-                <span><i class="ri-arrow-right-long-line"></i></span>
+                <span><i className="ri-arrow-right-long-line"></i></span>
               </button>
             </div>
           </div>
-          <div class="blog__card">
+          <div className="blog__card">
             <img src={blog2} alt="blog" />
-            <div class="blog__content">
+            <div className="blog__content">
               <h4>Trường học xanh là gì ? Cùng tìm hiểu về trường xanh</h4>
-              <button class="btn">
+              <button className="btn" onClick={() => navigate('/blog/2')}>
                 Đọc thêm
-                <span><i class="ri-arrow-right-long-line"></i></span>
+                <span><i className="ri-arrow-right-long-line"></i></span>
               </button>
             </div>
           </div>
-          <div class="blog__card">
+          <div className="blog__card">
             <img src={blog3} alt="blog" />
-            <div class="blog__content">
+            <div className="blog__content">
               <h4>
                 Trường xanh và những mục tiêu bền vững trong giáo dục
               </h4>
-              <button class="btn">
+              <button className="btn" onClick={() => navigate('/blog/3')}>
                 Đọc thêm
-                <span><i class="ri-arrow-right-long-line"></i></span>
+                <span><i className="ri-arrow-right-long-line"></i></span>
               </button>
             </div>
           </div>
         </div>
-        <div class="blog__btn">
-          <button class="btn" onClick={() => navigate('/blog')}>
+        <div className="blog__btn">
+          <button className="btn" onClick={() => navigate('/blog')}>
             Xem tất cả
-            <span><i class="ri-arrow-right-long-line"></i></span>
+            <span><i className="ri-arrow-right-long-line"></i></span>
           </button>
         </div>
       </div>
