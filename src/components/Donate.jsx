@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import donate from '../assets/donate.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Donate = () => {
   const swiperRef = useRef(null);
   const swiperInstance = useRef(null);
+  const navigate = useNavigate();
 
   const slides = [
     {
@@ -67,7 +69,7 @@ const Donate = () => {
   }, []);
 
   return (
-    <section className="section__container review__container">
+    <section className="section__container review__container" id="donate">
       <div className="review__image">
         <img src={donate} alt="donation" />
       </div>
@@ -87,7 +89,7 @@ const Donate = () => {
                   <h4>{slide.name}</h4>
                   <h5>{slide.title}</h5>
                   <div>
-                    <button className="btn">Quyên góp ngay</button>
+                    <button className="btn" onClick={() => navigate('/donate')}>Quyên góp ngay</button>
                   </div>
                 </div>
               </div>
