@@ -90,10 +90,12 @@ body {
 }
 
 nav {
-  position: fixed;
+  position: sticky;
+  top: 0;
   isolation: isolate;
   width: 100%;
-  z-index: 9;
+  z-index: 1000;
+  transition: box-shadow 0.2s;
 }
 
 .nav__header {
@@ -633,8 +635,10 @@ nav {
 
 @media (width > 768px) {
   nav {
-    position: static;
+    position: sticky;
+    top: 0;
     padding: 1.5rem;
+    background: #ffffff;
     max-width: var(--max-width);
     margin-inline: auto;
     display: flex;

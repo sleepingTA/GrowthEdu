@@ -17,7 +17,7 @@ const Home = () => (
     <Mission />
     <Destination />
     <Donate />
-    <Blog />
+
     <BannerGallery />
     
   </>
