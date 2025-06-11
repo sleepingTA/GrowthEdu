@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
+import MissionDetail from '../components/GreenMission/MissionDetail';
+import MissionCard from '../components/GreenMission/MissionCard';
+import MissionFilter from '../components/GreenMission/MissionFilter';
+import MissionStats from '../components/GreenMission/MissionStats';
+import CallToAction from '../components/GreenMission/CallToAction';
 
 const GreenMission = () => {
+  const { id } = useParams();
+  const location = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
-  const { id } = useParams();
 
   const [missions] = useState([
     {
@@ -112,7 +119,7 @@ const GreenMission = () => {
   const getTypeColor = (type) => {
     const colors = {
       "Trồng cây xanh": "#4CAF50",
-      "Tái chế rác thải": "#2196F3", 
+      "Tái chế rác thải": "#2196F3",
       "Vệ sinh trường học": "#FF9800",
       "Giáo dục môi trường": "#9C27B0"
     };
@@ -127,192 +134,13 @@ const GreenMission = () => {
     return { status: "Cần nhiều người", color: "#4CAF50" };
   };
 
-  // Nếu có id trên URL, chỉ lấy mission đó
   const selectedMission = id ? missions.find(m => m.id === Number(id)) : null;
-
-  // Nếu không có id, lọc theo loại như cũ
-  const filteredMissions = selectedType === "Tất cả" 
-    ? missions 
-    : missions.filter(mission => mission.type === selectedType);
-
-  // Tổng số tình nguyện viên
+  const filteredMissions = selectedType === "Tất cả" ? missions : missions.filter(mission => mission.type === selectedType);
   const totalVolunteers = missions.reduce((total, mission) => {
     const [current] = mission.volunteers.split('/');
     return total + parseInt(current);
   }, 0);
 
-  // Render chi tiết 1 mission nếu có id
-  if (selectedMission) {
-    const volunteerInfo = getVolunteerStatus(selectedMission.volunteers);
-    return (
-      <div style={{
-        fontFamily: '"Roboto", serif',
-        '--primary-color': '#01bbbf',
-        '--text-dark': '#1d293d',
-        '--text-light': '#62748e',
-        '--extra-light': '#fafafa',
-        '--white': '#ffffff',
-        '--max-width': '1400px'
-      }}>
-        <section style={{
-          maxWidth: 'var(--max-width)',
-          margin: 'auto',
-          padding: '6rem 2rem'
-        }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h3 style={{
-              marginBottom: '1rem',
-              fontSize: '2rem',
-              fontWeight: '700',
-              color: 'var(--primary-color)'
-            }}>
-              {selectedMission.type}
-            </h3>
-            <h2 style={{
-              fontSize: '2.2rem',
-              fontWeight: '700',
-              color: 'var(--text-dark)',
-              marginBottom: '1.5rem'
-            }}>
-              {selectedMission.title}
-            </h2>
-            <p style={{
-              fontSize: '1.1rem',
-              fontWeight: '500',
-              color: 'var(--text-light)',
-              lineHeight: '2rem',
-              maxWidth: '800px',
-              margin: '0 auto'
-            }}>
-              {selectedMission.description}
-            </p>
-          </div>
-          <div style={{
-            backgroundColor: 'var(--white)',
-            borderRadius: '1rem',
-            padding: '2rem',
-            boxShadow: '0 0 30px rgba(0, 0, 0, 0.1)',
-            maxWidth: 600,
-            margin: '0 auto'
-          }}>
-            <div style={{ marginBottom: '1.5rem' }}>
-              <span style={{
-                backgroundColor: getTypeColor(selectedMission.type),
-                color: 'white',
-                padding: '0.5rem 1rem',
-                borderRadius: '1.5rem',
-                fontSize: '0.9rem',
-                fontWeight: '600'
-              }}>
-                {selectedMission.type}
-              </span>
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-              <strong>Địa điểm:</strong> {selectedMission.location}
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-              <strong>Thời gian:</strong> {selectedMission.date} ({selectedMission.time})
-            </div>
-            <div style={{
-              marginBottom: '1rem',
-              backgroundColor: '#f8f9fa',
-              padding: '1rem',
-              borderRadius: '0.75rem'
-            }}>
-              <strong>Tình nguyện viên:</strong> {selectedMission.volunteers}
-              <span style={{
-                marginLeft: 12,
-                backgroundColor: volunteerInfo.color,
-                color: 'white',
-                padding: '0.3rem 1rem',
-                borderRadius: '1.5rem',
-                fontSize: '0.9rem',
-                fontWeight: '600'
-              }}>
-                {volunteerInfo.status}
-              </span>
-            </div>
-            <div style={{
-              backgroundColor: '#fff3cd',
-              padding: '1rem',
-              borderRadius: '0.5rem',
-              marginBottom: '1rem',
-              border: '1px solid #ffeaa7'
-            }}>
-              <strong>💡 Yêu cầu:</strong> {selectedMission.requirements}
-            </div>
-            <div style={{
-              backgroundColor: 'var(--extra-light)',
-              padding: '1.5rem',
-              borderRadius: '0.75rem',
-              marginBottom: '1.5rem'
-            }}>
-              <h5 style={{
-                margin: '0 0 1rem 0',
-                fontSize: '1rem',
-                fontWeight: '600',
-                color: 'var(--text-dark)'
-              }}>
-                📞 Thông tin liên hệ
-              </h5>
-              <div style={{ marginBottom: '0.5rem' }}>
-                <strong style={{ color: 'var(--text-dark)' }}>Người phụ trách:</strong>
-                <span style={{ marginLeft: '0.5rem', color: 'var(--text-light)' }}>
-                  {selectedMission.contact.name}
-                </span>
-              </div>
-              <div style={{ marginBottom: '0.5rem' }}>
-                <strong style={{ color: 'var(--text-dark)' }}>Điện thoại:</strong>
-                <span style={{ 
-                  marginLeft: '0.5rem', 
-                  color: 'var(--primary-color)',
-                  fontWeight: '600'
-                }}>
-                  {selectedMission.contact.phone}
-                </span>
-              </div>
-              <div>
-                <strong style={{ color: 'var(--text-dark)' }}>Email:</strong>
-                <span style={{ 
-                  marginLeft: '0.5rem', 
-                  color: 'var(--primary-color)',
-                  fontWeight: '600'
-                }}>
-                  {selectedMission.contact.email}
-                </span>
-              </div>
-            </div>
-            <button style={{
-              width: '100%',
-              padding: '1rem',
-              border: 'none',
-              backgroundColor: 'var(--primary-color)',
-              color: 'var(--white)',
-              borderRadius: '0.75rem',
-              fontSize: '1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: '0.3s',
-              fontFamily: '"Roboto", serif'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#019a9d';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'var(--primary-color)';
-              e.target.style.transform = 'translateY(0)';
-            }}
-            >
-              📝 Đăng ký tham gia
-            </button>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  // Nếu không có id, render danh sách như cũ
   return (
     <div style={{
       fontFamily: '"Roboto", serif',
@@ -323,406 +151,73 @@ const GreenMission = () => {
       '--white': '#ffffff',
       '--max-width': '1400px'
     }}>
-      {/* Header Section */}
       <section style={{
         maxWidth: 'var(--max-width)',
         margin: 'auto',
         padding: '6rem 2rem'
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h3 style={{
-            marginBottom: '1rem',
-            fontSize: '2rem',
-            fontWeight: '700',
-            color: 'var(--primary-color)'
-          }}>
-            Nhiệm vụ xanh
-          </h3>
-          <h2 style={{
-            fontSize: '3rem',
-            fontWeight: '700',
-            color: 'var(--text-dark)',
-            marginBottom: '1.5rem'
-          }}>
-            Hãy cùng thực hiện những "nhiệm vụ" vì môi trường
-          </h2>
-          <p style={{
-            fontSize: '1.1rem',
-            fontWeight: '500',
-            color: 'var(--text-light)',
-            lineHeight: '2rem',
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}>
-            Tham gia các hoạt động tình nguyện bảo vệ môi trường tại các địa điểm trong thành phố. 
-            Mỗi đóng góp nhỏ của bạn sẽ tạo nên sự thay đổi lớn cho cộng đồng.
-          </p>
-        </div>
-
-        {/* Statistics and Filter */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '3rem',
-          flexWrap: 'wrap',
-          gap: '2rem'
-        }}>
-          {/* Statistics */}
-          <div style={{
-            backgroundColor: 'var(--white)',
-            padding: '1.5rem 2rem',
-            borderRadius: '1rem',
-            boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)',
-            textAlign: 'center',
-            minWidth: '200px'
-          }}>
-            <h4 style={{
-              margin: '0 0 0.5rem 0',
-              fontSize: '2rem',
-              fontWeight: '800',
-              color: 'var(--primary-color)'
+        {selectedMission ? (
+          <MissionDetail mission={selectedMission} getTypeColor={getTypeColor} getVolunteerStatus={getVolunteerStatus} />
+        ) : (
+          <>
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+              <h3 style={{
+                marginBottom: '1rem',
+                fontSize: '2rem',
+                fontWeight: '700',
+                color: 'var(--primary-color)'
+              }}>
+                Nhiệm vụ xanh
+              </h3>
+              <h2 style={{
+                fontSize: '3rem',
+                fontWeight: '700',
+                color: 'var(--text-dark)',
+                marginBottom: '1.5rem'
+              }}>
+                Hãy cùng thực hiện những "nhiệm vụ" vì môi trường
+              </h2>
+              <p style={{
+                fontSize: '1.1rem',
+                fontWeight: '500',
+                color: 'var(--text-light)',
+                lineHeight: '2rem',
+                maxWidth: '800px',
+                margin: '0 auto'
+              }}>
+                Tham gia các hoạt động tình nguyện bảo vệ môi trường tại các địa điểm trong thành phố.
+                Mỗi đóng góp nhỏ của bạn sẽ tạo nên sự thay đổi lớn cho cộng đồng.
+              </p>
+            </div>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '3rem',
+              flexWrap: 'wrap',
+              gap: '2rem'
             }}>
-              {totalVolunteers}
-            </h4>
-            <p style={{
-              margin: 0,
-              color: 'var(--text-light)',
-              fontSize: '1rem'
+              <MissionStats totalVolunteers={totalVolunteers} />
+              <MissionFilter missionTypes={missionTypes} selectedType={selectedType} setSelectedType={setSelectedType} />
+            </div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+              gap: '2rem',
+              marginBottom: '4rem'
             }}>
-              Tình nguyện viên đã đăng ký
-            </p>
-          </div>
-
-          {/* Filter */}
-          <div style={{
-            display: 'flex',
-            gap: '0.5rem',
-            flexWrap: 'wrap'
-          }}>
-            {missionTypes.map((type) => (
-              <button
-                key={type}
-                onClick={() => setSelectedType(type)}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  border: selectedType === type ? '2px solid var(--primary-color)' : '2px solid transparent',
-                  backgroundColor: selectedType === type ? 'var(--primary-color)' : 'var(--white)',
-                  color: selectedType === type ? 'var(--white)' : 'var(--text-dark)',
-                  borderRadius: '2rem',
-                  cursor: 'pointer',
-                  fontSize: '0.9rem',
-                  fontWeight: '600',
-                  transition: '0.3s',
-                  fontFamily: '"Roboto", serif'
-                }}
-                onMouseEnter={(e) => {
-                  if (selectedType !== type) {
-                    e.target.style.backgroundColor = 'var(--extra-light)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (selectedType !== type) {
-                    e.target.style.backgroundColor = 'var(--white)';
-                  }
-                }}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Missions Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-          gap: '2rem',
-          marginBottom: '4rem'
-        }}>
-          {filteredMissions.map((mission) => {
-            const volunteerInfo = getVolunteerStatus(mission.volunteers);
-            
-            return (
-              <div
-                key={mission.id}
-                style={{
-                  backgroundColor: 'var(--white)',
-                  borderRadius: '1rem',
-                  padding: '2rem',
-                  boxShadow: '0 0 30px rgba(0, 0, 0, 0.1)',
-                  transition: '0.3s',
-                  cursor: 'pointer',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-5px)';
-                  e.currentTarget.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 0 30px rgba(0, 0, 0, 0.1)';
-                }}
-              >
-                {/* Type Badge */}
-                <div style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  right: '1rem',
-                  backgroundColor: getTypeColor(mission.type),
-                  color: 'white',
-                  padding: '0.5rem 1rem',
-                  borderRadius: '1.5rem',
-                  fontSize: '0.8rem',
-                  fontWeight: '600'
-                }}>
-                  {mission.type}
-                </div>
-
-                {/* Mission Header */}
-                <div style={{ marginBottom: '1.5rem', paddingTop: '1rem' }}>
-                  <h3 style={{
-                    fontSize: '1.3rem',
-                    fontWeight: '700',
-                    color: 'var(--text-dark)',
-                    marginBottom: '0.5rem',
-                    lineHeight: '1.4'
-                  }}>
-                    {mission.title}
-                  </h3>
-                  <p style={{
-                    margin: 0,
-                    color: 'var(--text-light)',
-                    fontSize: '0.95rem'
-                  }}>
-                    📍 {mission.location}
-                  </p>
-                </div>
-
-                {/* Date and Time */}
-                <div style={{
-                  display: 'flex',
-                  gap: '1rem',
-                  marginBottom: '1rem',
-                  flexWrap: 'wrap'
-                }}>
-                  <div style={{
-                    backgroundColor: 'var(--extra-light)',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '0.5rem',
-                    fontSize: '0.9rem',
-                    color: 'var(--text-dark)'
-                  }}>
-                    📅 {mission.date}
-                  </div>
-                  <div style={{
-                    backgroundColor: 'var(--extra-light)',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '0.5rem',
-                    fontSize: '0.9rem',
-                    color: 'var(--text-dark)'
-                  }}>
-                    ⏰ {mission.time}
-                  </div>
-                </div>
-
-                {/* Volunteers Status */}
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '1.5rem',
-                  padding: '1rem',
-                  backgroundColor: '#f8f9fa',
-                  borderRadius: '0.75rem'
-                }}>
-                  <div>
-                    <p style={{
-                      margin: '0 0 0.25rem 0',
-                      fontSize: '0.9rem',
-                      color: 'var(--text-light)'
-                    }}>
-                      Tình nguyện viên
-                    </p>
-                    <p style={{
-                      margin: 0,
-                      fontSize: '1.2rem',
-                      fontWeight: '700',
-                      color: 'var(--text-dark)'
-                    }}>
-                      {mission.volunteers}
-                    </p>
-                  </div>
-                  <div style={{
-                    backgroundColor: volunteerInfo.color,
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '1.5rem',
-                    fontSize: '0.8rem',
-                    fontWeight: '600'
-                  }}>
-                    {volunteerInfo.status}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p style={{
-                  fontSize: '0.95rem',
-                  color: 'var(--text-light)',
-                  lineHeight: '1.6',
-                  marginBottom: '1.5rem'
-                }}>
-                  {mission.description}
-                </p>
-
-                {/* Requirements */}
-                <div style={{
-                  backgroundColor: '#fff3cd',
-                  padding: '1rem',
-                  borderRadius: '0.5rem',
-                  marginBottom: '2rem',
-                  border: '1px solid #ffeaa7'
-                }}>
-                  <p style={{
-                    margin: '0 0 0.5rem 0',
-                    fontSize: '0.9rem',
-                    fontWeight: '600',
-                    color: '#856404'
-                  }}>
-                    💡 Yêu cầu:
-                  </p>
-                  <p style={{
-                    margin: 0,
-                    fontSize: '0.9rem',
-                    color: '#856404'
-                  }}>
-                    {mission.requirements}
-                  </p>
-                </div>
-
-                {/* Contact Info */}
-                <div style={{
-                  backgroundColor: 'var(--extra-light)',
-                  padding: '1.5rem',
-                  borderRadius: '0.75rem',
-                  marginBottom: '1.5rem'
-                }}>
-                  <h5 style={{
-                    margin: '0 0 1rem 0',
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    color: 'var(--text-dark)'
-                  }}>
-                    📞 Thông tin liên hệ
-                  </h5>
-                  <div style={{ marginBottom: '0.5rem' }}>
-                    <strong style={{ color: 'var(--text-dark)' }}>Người phụ trách:</strong>
-                    <span style={{ marginLeft: '0.5rem', color: 'var(--text-light)' }}>
-                      {mission.contact.name}
-                    </span>
-                  </div>
-                  <div style={{ marginBottom: '0.5rem' }}>
-                    <strong style={{ color: 'var(--text-dark)' }}>Điện thoại:</strong>
-                    <span style={{ 
-                      marginLeft: '0.5rem', 
-                      color: 'var(--primary-color)',
-                      fontWeight: '600'
-                    }}>
-                      {mission.contact.phone}
-                    </span>
-                  </div>
-                  <div>
-                    <strong style={{ color: 'var(--text-dark)' }}>Email:</strong>
-                    <span style={{ 
-                      marginLeft: '0.5rem', 
-                      color: 'var(--primary-color)',
-                      fontWeight: '600'
-                    }}>
-                      {mission.contact.email}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Register Button */}
-                <button style={{
-                  width: '100%',
-                  padding: '1rem',
-                  border: 'none',
-                  backgroundColor: 'var(--primary-color)',
-                  color: 'var(--white)',
-                  borderRadius: '0.75rem',
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: '0.3s',
-                  fontFamily: '"Roboto", serif'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = '#019a9d';
-                  e.target.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = 'var(--primary-color)';
-                  e.target.style.transform = 'translateY(0)';
-                }}
-                >
-                  📝 Đăng ký tham gia
-                </button>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Call to Action */}
-        <div style={{
-          textAlign: 'center',
-          padding: '3rem 2rem',
-          backgroundColor: 'var(--extra-light)',
-          borderRadius: '1rem'
-        }}>
-          <h4 style={{
-            marginBottom: '1rem',
-            fontSize: '1.5rem',
-            fontWeight: '700',
-            color: 'var(--text-dark)'
-          }}>
-            Không tìm thấy nhiệm vụ phù hợp? 🤔
-          </h4>
-          <p style={{
-            marginBottom: '2rem',
-            fontSize: '1rem',
-            color: 'var(--text-light)',
-            lineHeight: '1.6',
-            maxWidth: '600px',
-            margin: '0 auto 2rem auto'
-          }}>
-            Hãy liên hệ với chúng tôi để đề xuất hoạt động mới hoặc tạo nhóm tình nguyện riêng cho khu vực của bạn!
-          </p>
-          <button style={{
-            padding: '1rem 2rem',
-            border: '2px solid var(--primary-color)',
-            backgroundColor: 'var(--white)',
-            color: 'var(--primary-color)',
-            borderRadius: '2rem',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: '0.3s',
-            fontFamily: '"Roboto", serif'
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = 'var(--primary-color)';
-            e.target.style.color = 'var(--white)';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = 'var(--white)';
-            e.target.style.color = 'var(--primary-color)';
-          }}
-          >
-            💬 Liên hệ đề xuất hoạt động
-          </button>
-        </div>
+              {filteredMissions.map((mission) => (
+                <MissionCard
+                  key={mission.id}
+                  mission={mission}
+                  getTypeColor={getTypeColor}
+                  getVolunteerStatus={getVolunteerStatus}
+                />
+              ))}
+            </div>
+            <CallToAction />
+          </>
+        )}
       </section>
     </div>
   );
