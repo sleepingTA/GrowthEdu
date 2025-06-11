@@ -120,8 +120,8 @@ const BlogPage = () => {
       date: "08/03/2024",
       excerpt: "Ở vùng đất mũi Ca Mau, trường Tiểu học Cà Mau đang phải đối mặt với tình trạng sạt lở nghiêm trọng, đe dọa việc học tập của các em...",
       content: "Trường Tiểu học Cà Mau nằm ở vùng đất mũi, nơi chịu tác động mạnh mẽ của biến đổi khí hậu. Sạt lở đã 'nuốt' mất gần một nửa sân trường, khiến việc học tập của 320 em học sinh gặp nhiều khó khăn.\n\nCô Hương, giáo viên lớp 3 lo lắng: 'Mỗi lần thủy triều lên cao, chúng tôi đều phải di chuyển bàn ghế ra xa bờ. Có hôm nước tràn vào tận lớp học, các em phải đứng trên ghế để tiếp tục học bài.'\n\nĐây là ngôi trường duy nhất trong vùng, phục vụ học sinh từ 5 ấp xa. Nếu không có sự hỗ trợ kịp thời, ngôi trường có thể sẽ bị biển 'nuốt chửng' hoàn toàn trong vòng 2-3 năm tới.",
-      beforeImage: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=600&h=400&fit=crop",
-      afterImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+      beforeImage: "https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2025/5/6/z65117755532510b972cef493e22bc56861b2942cd874c-17465135641601190783981.jpg",
+      afterImage: "https://cdn.giaoducthoidai.vn/images/2558b157b0dd2fa70dca3778b5c71b025a4fc666baf1cc51bb6c83b56c0c0051f411c57ea3903c02bc32036e690152ecbc63b4cc55323ef70a33248940d3c8c9/gdmn-ca-mau-3.jpg",
       updates: [
         { date: "05/03/2024", content: "Đánh giá tình hình sạt lở" },
         { date: "12/03/2024", content: "Lên kế hoạch gia cố bờ kè" },
