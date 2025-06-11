@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, MapPin, Users, Calendar, Target, TrendingUp } from 'lucide-react';
+import { Heart, MapPin, Users, Calendar, Target, TrendingUp, X, CheckCircle } from 'lucide-react';
 
 const BlogPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+  
   // State cho việc quản lý donations
   const [donations, setDonations] = useState({
     1: { amount: 15750000, goal: 50000000 },
@@ -14,6 +12,10 @@ const BlogPage = () => {
 
   // State cho animation counter
   const [animatedCounters, setAnimatedCounters] = useState({});
+
+  // State cho thank you modal
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [donatedSchool, setDonatedSchool] = useState(null);
 
   // Animation counter effect
   useEffect(() => {
@@ -51,6 +53,17 @@ const BlogPage = () => {
         amount: prev[schoolId].amount + 50000
       }
     }));
+    
+    // Hiển thị form cảm ơn
+    const school = blogPosts.find(post => post.id === schoolId);
+    setDonatedSchool(school);
+    setShowThankYou(true);
+  };
+
+  // Đóng form cảm ơn
+  const closeThankYou = () => {
+    setShowThankYou(false);
+    setDonatedSchool(null);
   };
 
   // Format tiền tệ
@@ -376,7 +389,10 @@ const BlogPage = () => {
                         color: 'var(--white, #ffffff)',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease',
-                        boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)'
+                        boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
                       }}
                       onMouseOver={(e) => {
                         e.target.style.transform = 'translateY(-2px)';
@@ -490,6 +506,245 @@ const BlogPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Thank You Modal */}
+      {showThankYou && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '1rem'
+        }}>
+          <div style={{
+            backgroundColor: 'var(--white, #ffffff)',
+            borderRadius: '1.5rem',
+            padding: '3rem 2rem',
+            maxWidth: '500px',
+            width: '100%',
+            textAlign: 'center',
+            position: 'relative',
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)',
+            animation: 'slideInUp 0.5s ease-out'
+          }}>
+            {/* Close Button */}
+            <button
+              onClick={closeThankYou}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.5rem',
+                borderRadius: '50%',
+                color: '#6b7280'
+              }}
+            >
+              <X size={24} />
+            </button>
+
+            {/* Success Icon */}
+            <div style={{
+              width: '80px',
+              height: '80px',
+              backgroundColor: '#10b981',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 2rem',
+              animation: 'pulse 2s infinite'
+            }}>
+              <CheckCircle size={40} color="white" />
+            </div>
+
+            {/* Thank You Message */}
+            <h2 style={{
+              fontSize: '2rem',
+              fontWeight: '800',
+              color: 'var(--text-dark, #1d293d)',
+              marginBottom: '1rem'
+            }}>
+              Cảm ơn bạn rất nhiều!
+            </h2>
+
+            <p style={{
+              fontSize: '1.2rem',
+              color: 'var(--text-light, #62748e)',
+              marginBottom: '2rem',
+              lineHeight: '1.6'
+            }}>
+              Bạn vừa đóng góp <strong style={{ color: 'var(--primary-color, #01bbbf)' }}>50,000đ</strong> cho {donatedSchool?.title}
+            </p>
+
+            {/* School Info */}
+            <div style={{
+              backgroundColor: '#f0f9ff',
+              borderRadius: '1rem',
+              padding: '1.5rem',
+              marginBottom: '2rem'
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <MapPin size={16} style={{ color: 'var(--primary-color, #01bbbf)' }} />
+                <span style={{ color: 'var(--primary-color, #01bbbf)', fontWeight: '600' }}>
+                  {donatedSchool?.location}
+                </span>
+              </div>
+              <p style={{
+                fontSize: '1rem',
+                color: 'var(--text-dark, #1d293d)',
+                fontWeight: '600'
+              }}>
+                {donatedSchool?.students} em học sinh sẽ được hưởng lợi từ đóng góp của bạn
+              </p>
+            </div>
+
+            {/* Impact Message */}
+            <p style={{
+              fontSize: '1rem',
+              color: 'var(--text-light, #62748e)',
+              marginBottom: '2rem',
+              fontStyle: 'italic'
+            }}>
+              "Mỗi đóng góp nhỏ của bạn là một bước tiến lớn để thắp sáng ước mơ của các em"
+            </p>
+
+            {/* Action Buttons */}
+            <div style={{
+              display: 'flex',
+              gap: '1rem',
+              flexDirection: 'column'
+            }}>
+              <button
+                onClick={closeThankYou}
+                style={{
+                  background: 'linear-gradient(135deg, var(--primary-color, #01bbbf) 0%, #3b82f6 100%)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '3rem',
+                  padding: '1rem 2rem',
+                  fontSize: '1.1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                Tiếp tục chia sẻ yêu thương
+              </button>
+              
+              <button
+                onClick={closeThankYou}
+                style={{
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-light, #62748e)',
+                  border: '2px solid #e5e7eb',
+                  borderRadius: '3rem',
+                  padding: '1rem 2rem',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes slideInUp {
+          from {
+            transform: translateY(100px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+        }
+
+        .section__container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1rem;
+        }
+
+        .section__subheader {
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--primary-color, #01bbbf);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 0.5rem;
+        }
+
+        .section__header {
+          font-size: 3rem;
+          font-weight: 800;
+          color: var(--text-dark, #1d293d);
+          line-height: 1.2;
+          margin-bottom: 1rem;
+        }
+
+        .section__description {
+          font-size: 1.2rem;
+          color: var(--text-light, #62748e);
+          line-height: 1.6;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 1rem 2rem;
+          font-size: 1rem;
+          font-weight: 600;
+          text-decoration: none;
+          border-radius: 3rem;
+          transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+          .section__header {
+            font-size: 2rem;
+          }
+          
+          .section__description {
+            font-size: 1rem;
+          }
+          
+          .blog__content {
+            padding: 1.5rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
