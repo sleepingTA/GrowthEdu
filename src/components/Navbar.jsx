@@ -19,8 +19,9 @@ const Navbar = () => {
       </div>
       <ul className="nav__links" id="nav-links">
         <li><Link to="/">Trang chủ</Link></li>
-        <li><a href="#blog">Blog cộng đồng</a></li>
+        <li><Link to="/blog">Blog cộng đồng</Link></li>
         <li><a href="#mission">Nhiệm vụ xanh</a></li>
+        <li><Link to="/honor">Bảng vinh danh</Link></li>
         <li>
           <button className="btn" onClick={() => navigate('/donate')}>
             Quyên góp cho cộng đồng

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 const DonatePage = () => {
-  // Danh sách người ủng hộ mẫu
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   const [supporters] = useState([
     {
       id: 1,

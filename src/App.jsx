@@ -4,9 +4,10 @@ import Home from './pages/Home';
 import BlogPage from './pages/BlogPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import BlogDetail from './pages/BlogDetail';
+
 import Donate from './pages/Donation';
 import GreenMission from './pages/GreenMission';
+import Honor from './pages/Honor';
 
 function App() {
   useEffect(() => {
@@ -63,10 +64,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
+         
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<GreenMission />} />
           <Route path="/mission/:id" element={<GreenMission />} />
+          <Route path="/honor" element={<Honor />} />
         </Routes>
 
       <Footer />

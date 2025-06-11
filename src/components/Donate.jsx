@@ -29,13 +29,13 @@ const Donate = () => {
   ];
 
   useEffect(() => {
-    // Load Swiper CSS
+ 
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css';
     document.head.appendChild(link);
 
-    // Load Swiper JS
+  
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js';
     script.onload = () => {
