@@ -1,74 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import BlogPost from '../components/Blog/BlogPost';
-import BlogCard from '../components/Blog/BlogCard';
-import ThankYouModal from '../components/ThankYouModal';
-import CallToAction from '../components/GreenMission/CallToAction';
+import { useParams, Link } from 'react-router-dom';
+import { MapPin, Users, Calendar } from 'lucide-react';
 
-const BlogPage = () => {
-  const [donations, setDonations] = useState({
-    1: { amount: 15750000, goal: 50000000 },
-    2: { amount: 8920000, goal: 30000000 }
-  });
-
-  const [animatedCounters, setAnimatedCounters] = useState({});
-  const [showThankYou, setShowThankYou] = useState(false);
-  const [donatedSchool, setDonatedSchool] = useState(null);
-
-  useEffect(() => {
-    Object.keys(donations).forEach(id => {
-      const targetAmount = donations[id].amount;
-      const duration = 2000;
-      const steps = 60;
-      const stepValue = targetAmount / steps;
-      let currentValue = 0;
-      let step = 0;
-
-      const timer = setInterval(() => {
-        currentValue += stepValue;
-        step++;
-        
-        if (step >= steps) {
-          currentValue = targetAmount;
-          clearInterval(timer);
-        }
-
-        setAnimatedCounters(prev => ({
-          ...prev,
-          [id]: Math.floor(currentValue)
-        }));
-      }, duration / steps);
-    });
-  }, [donations]);
-
-  const handleDonation = (schoolId) => {
-    setDonations(prev => ({
-      ...prev,
-      [schoolId]: {
-        ...prev[schoolId],
-        amount: prev[schoolId].amount + 50000
-      }
-    }));
-    
-    const school = blogPosts.find(post => post.id === schoolId);
-    setDonatedSchool(school);
-    setShowThankYou(true);
-  };
-
-  const closeThankYou = () => {
-    setShowThankYou(false);
-    setDonatedSchool(null);
-  };
-
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
-    }).format(amount);
-  };
-
-  const calculateProgress = (amount, goal) => {
-    return Math.min((amount / goal) * 100, 100);
-  };
+const BlogDetail = () => {
+  const { id } = useParams();
 
   const blogPosts = [
     {
@@ -158,6 +92,47 @@ const BlogPage = () => {
     }
   ];
 
+  const post = blogPosts.find(p => p.id === parseInt(id));
+
+  if (!post) {
+    return (
+      <div style={{ 
+        fontFamily: '"Roboto", serif',
+        backgroundColor: 'var(--extra-light, #fafafa)',
+        minHeight: '100vh',
+        padding: '4rem 1rem',
+        textAlign: 'center'
+      }}>
+        <h1 style={{ 
+          fontSize: '2rem',
+          fontWeight: '800',
+          color: 'var(--text-dark, #1d293d)',
+          marginBottom: '1rem'
+        }}>
+          Bài viết không tồn tại
+        </h1>
+        <Link to="/blog">
+          <button
+            className="btn"
+            style={{
+              background: 'linear-gradient(135deg, var(--primary-color, #01bbbf) 0%, #3b82f6 100%)',
+              color: 'var(--white, #ffffff)',
+              border: 'none',
+              borderRadius: '3rem',
+              padding: '1rem 2rem',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            Quay lại trang Blog
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div style={{ 
       fontFamily: '"Roboto", serif',
@@ -169,74 +144,150 @@ const BlogPage = () => {
           <div style={{ textAlign: 'center' }}>
             <div className="section__subheader">Câu chuyện cảm động</div>
             <h1 className="section__header" style={{ marginBottom: '1rem' }}>
-              Hành trình thắp sáng ước mơ
+              {post.title}
             </h1>
-            <p className="section__description">
-              Những câu chuyện thật về các em học sinh vùng khó khăn và hành trình đồng hành của chúng ta
-            </p>
           </div>
         </div>
       </section>
 
       <section style={{ backgroundColor: 'var(--extra-light, #fafafa)' }}>
         <div className="section__container">
-          <div className="blog__grid" style={{ 
-            display: 'grid',
-            gap: '2rem',
-            gridTemplateColumns: '1fr',
-            marginBlock: '2rem'
+          <article className="blog__card" style={{
+            backgroundColor: 'var(--white, #ffffff)',
+            borderRadius: '0.75rem',
+            overflow: 'hidden',
+            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+            transition: 'all 0.3s ease',
+            marginBottom: '2rem'
           }}>
-            {blogPosts.map((post) => (
-              post.hasDonation ? (
-                <BlogPost
-                  key={post.id}
-                  post={post}
-                  donations={donations}
-                  animatedCounters={animatedCounters}
-                  handleDonation={handleDonation}
-                  formatCurrency={formatCurrency}
-                  calculateProgress={calculateProgress}
-                />
-              ) : (
-                <BlogCard
-                  key={post.id}
-                  post={post}
-                />
-              )
-            ))}
-          </div>
+            <div className="blog__content" style={{ padding: '2rem' }}>
+              {/* Meta Information */}
+              <div style={{ 
+                display: 'flex', 
+                flexWrap: 'wrap', 
+                gap: '1rem', 
+                marginBottom: '1.5rem',
+                fontSize: '0.9rem',
+                color: 'var(--text-light, #62748e)'
+              }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <MapPin size={16} />
+                  {post.location}
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Users size={16} />
+                  {post.students} học sinh
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Calendar size={16} />
+                  {post.date}
+                </span>
+              </div>
+              
+              {/* Title */}
+              <h4 style={{ 
+                marginBottom: '1.5rem',
+                fontSize: '1.5rem',
+                fontWeight: '800',
+                color: 'var(--text-dark, #1d293d)',
+                lineHeight: '1.4'
+              }}>
+                {post.title}
+              </h4>
+              
+              {/* Before/After Images */}
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '1.5rem',
+                marginBottom: '2rem'
+              }}>
+                <div>
+                  <h5 style={{ 
+                    fontWeight: '600',
+                    color: 'var(--text-dark, #1d293d)',
+                    marginBottom: '0.5rem',
+                    fontSize: '1rem'
+                  }}>
+                    Hiện tại
+                  </h5>
+                  <img 
+                    src={post.beforeImage} 
+                    alt="Trước khi hỗ trợ"
+                    style={{
+                      width: '100%',
+                      height: '200px',
+                      objectFit: 'cover',
+                      borderRadius: '0.5rem',
+                      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+                    }}
+                  />
+                </div>
+                <div>
+                  <h5 style={{ 
+                    fontWeight: '600',
+                    color: 'var(--text-dark, #1d293d)',
+                    marginBottom: '0.5rem',
+                    fontSize: '1rem'
+                  }}>
+                    Mục tiêu
+                  </h5>
+                  <img 
+                    src={post.afterImage} 
+                    alt="Sau khi hỗ trợ"
+                    style={{
+                      width: '100%',
+                      height: '200px',
+                      objectFit: 'cover',
+                      borderRadius: '0.5rem',
+                      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+                      opacity: '0.8'
+                    }}
+                  />
+                </div>
+              </div>
 
-          <CallToAction />
+              {/* Story Content */}
+              <div style={{ marginBottom: '2rem' }}>
+                {post.content.split('\n\n').map((paragraph, index) => (
+                  <p key={index} style={{ 
+                    color: 'var(--text-light, #62748e)',
+                    lineHeight: '1.8',
+                    marginBottom: '1rem',
+                    fontSize: '1rem'
+                  }}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          {/* Back to Blog Button */}
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <Link to="/blog">
+              <button
+                className="btn"
+                style={{
+                  background: 'linear-gradient(135deg, var(--primary-color, #01bbbf) 0%, #3b82f6 100%)',
+                  color: 'var(--white, #ffffff)',
+                  border: 'none',
+                  borderRadius: '3rem',
+                  padding: '1rem 2rem',
+                  fontSize: '1.1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                Quay lại trang Blog
+              </button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <ThankYouModal
-        showThankYou={showThankYou}
-        closeThankYou={closeThankYou}
-        donatedSchool={donatedSchool}
-      />
-
       <style jsx>{`
-        @keyframes slideInUp {
-          from {
-            transform: translateY(100px);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes pulse {
-          0%, 100% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.05);
-          }
-        }
-
         .section__container {
           max-width: 1200px;
           margin: 0 auto;
@@ -260,14 +311,6 @@ const BlogPage = () => {
           margin-bottom: 1rem;
         }
 
-        .section__description {
-          font-size: 1.2rem;
-          color: var(--text-light, #62748e);
-          lineHeight: 1.6;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
         .btn {
           display: inline-flex;
           align-items: center;
@@ -285,10 +328,6 @@ const BlogPage = () => {
             font-size: 2rem;
           }
           
-          .section__description {
-            font-size: 1rem;
-          }
-          
           .blog__content {
             padding: 1.5rem !important;
           }
@@ -298,4 +337,4 @@ const BlogPage = () => {
   );
 };
 
-export default BlogPage;
+export default BlogDetail;

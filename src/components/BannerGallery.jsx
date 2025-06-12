@@ -12,8 +12,8 @@ import banner8 from '../assets/banner-8.jpg';
 
 const BannerGallery = () => {
   return (
-    <section class="banner">
-      <div class="banner__wrapper">
+    <section className="banner">
+      <div className="banner__wrapper">
         <img src={banner1} alt="banner" />
         <img src={banner2} alt="banner" />
         <img src={banner3} alt="banner" />
