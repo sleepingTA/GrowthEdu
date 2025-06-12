@@ -9,6 +9,7 @@ import Donate from '../components/Donate';
 import BannerGallery from '../components/BannerGallery';
 
 
+
 const Home = () => {
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const Home = () => {
       <Destination />
       <Donate />
       <BannerGallery />
+      
     </>
   );
 };

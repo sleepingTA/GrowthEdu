@@ -4,10 +4,11 @@ import Home from './pages/Home';
 import BlogPage from './pages/BlogPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
+import Gemini from './components/Gemini/Gemini';
 import Donate from './pages/Donation';
 import GreenMission from './pages/GreenMission';
 import Honor from './pages/Honor';
+import BlogDetail from './pages/BlogDetail';
 
 function App() {
   useEffect(() => {
@@ -69,8 +70,9 @@ function App() {
           <Route path="/mission" element={<GreenMission />} />
           <Route path="/mission/:id" element={<GreenMission />} />
           <Route path="/honor" element={<Honor />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
         </Routes>
-
+      <Gemini />
       <Footer />
     </>
   );

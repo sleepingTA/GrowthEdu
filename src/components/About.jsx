@@ -7,39 +7,39 @@ import banner5 from '../assets/banner-5.jpg';
 
 const About = () => {
   return (
-    <section class="destination">
-      <div class="section__container destination__container">
-        <h3 class="section__subheader">Về chúng tôi</h3>
-        <h2 class="section__header">Các hoạt động vì trường xanh</h2>
-        <div class="destination__grid">
-          <div class="destination__card">
+    <section className="destination">
+      <div className="section__container destination__container">
+        <h3 className="section__subheader">Về chúng tôi</h3>
+        <h2 className="section__header">Các hoạt động vì trường xanh</h2>
+        <div className="destination__grid">
+          <div className="destination__card">
             <img src={banner4} alt="destination" />
-            <div class="destination__card__content">
+            <div className="destination__card__content">
               <h4>Hành trình xây dựng trường học xanh – Vì một tương lai bền vững!</h4>
               <h5>Trường THPT Bình Phước</h5>
-              <div class="destination__card__footer">
+              <div className="destination__card__footer">
          
                 <p>23-5-2021</p>
               </div>
             </div>
           </div>
-          <div class="destination__card">
+          <div className="destination__card">
             <img src={banner6} alt="destination" />
-            <div class="destination__card__content">
+            <div className="destination__card__content">
               <h4>Cùng nhau trồng cây, tô xanh ngôi trường thân yêu.</h4>
               <h5>TPHCM</h5>
-              <div class="destination__card__footer">
+              <div className="destination__card__footer">
         
                 <p>26-7-2022</p>
               </div>
             </div>
           </div>
-          <div class="destination__card">
+          <div className="destination__card">
             <img src={banner5} alt="destination" />
-            <div class="destination__card__content">
+            <div className="destination__card__content">
               <h4>Trường xanh – Nơi học sinh chung tay bảo vệ môi trường.</h4>
               <h5>Trường Tiểu Học Bù Nho</h5>
-              <div class="destination__card__footer">
+              <div className="destination__card__footer">
             
                 <p>2-4-2024</p>
               </div>
