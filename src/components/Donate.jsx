@@ -29,13 +29,13 @@ const Donate = () => {
   ];
 
   useEffect(() => {
- 
+
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css';
     document.head.appendChild(link);
 
-  
+
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js';
     script.onload = () => {
@@ -76,7 +76,7 @@ const Donate = () => {
       <div className="review__content">
         <h3 className="section__subheader">Quyên góp</h3>
         <h2 className="section__header">Hãy cùng chung tay góp sức cho môi trường</h2>
-        
+
         <div className="swiper" ref={swiperRef}>
           <div className="swiper-wrapper">
             {slides.map((slide) => (

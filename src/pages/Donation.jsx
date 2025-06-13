@@ -4,6 +4,7 @@ import BankInfo from '../components/BankInfo';
 import SupportersList from '../components/SupportersList';
 import SchoolCard from '../components/SchoolCard';
 import ThankYouModal from '../components/ThankYouModal';
+import qrImage from '../assets/qr.jpg';
 
 const DonatePage = () => {
   // Scroll to top on page load
@@ -71,8 +72,7 @@ const DonatePage = () => {
     bankName: 'Ngân hàng Vietcombank',
     accountNumber: '1234567890',
     accountName: 'NGUYEN VAN A',
-    qrImage:
-      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1 BIFFSPUQ8L3RleHQ+CiAgPHJlY3QgeD0iMjAiIHk9IjIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cmVjdCB4PSI0MCIgeT0iNDAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=',
+    qrImage: qrImage,
   };
 
   // School data with bank information
@@ -93,8 +93,7 @@ const DonatePage = () => {
         bankName: 'Ngân hàng BIDV',
         accountNumber: '9876543210',
         accountName: 'TRUONG TIEU HOC TAN HUNG',
-        qrImage:
-          'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlRBTiBIVU5HPC90ZXh0PgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+',
+        qrImage: qrImage,
       },
     },
     {
@@ -113,8 +112,7 @@ const DonatePage = () => {
         bankName: 'Ngân hàng Techcombank',
         accountNumber: '4567891230',
         accountName: 'TRUONG THCS NUI THANH',
-        qrImage:
-          'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5VSSBUSEFOSDwvdGV4dD4KICA8cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSIxNjAiIGhlaWdodD0iMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjQwIiB5PSI0MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPg==',
+        qrImage: qrImage,
       },
     },
     {
@@ -133,8 +131,7 @@ const DonatePage = () => {
         bankName: 'Ngân hàng Agribank',
         accountNumber: '3216549870',
         accountName: 'TRUONG TIEU HOC CA MAU',
-        qrImage:
-          'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZmZmZiIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkNBIE1BVT8vdGV4dD4KICA8cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSIxNjAiIGhlaWdodD0iMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjQwIiB5PSI0MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPg==',
+        qrImage: qrImage,
       },
     },
   ];
@@ -142,7 +139,7 @@ const DonatePage = () => {
   // Handle jar shake animation
   const shakeJar = () => {
     setIsJarShaking(true);
-    
+
     // Generate falling coins
     const newCoins = [];
     for (let i = 0; i < 8; i++) {
@@ -153,7 +150,7 @@ const DonatePage = () => {
       });
     }
     setCoins(newCoins);
-    
+
     // Reset animation after 2 seconds
     setTimeout(() => {
       setIsJarShaking(false);
@@ -166,7 +163,7 @@ const DonatePage = () => {
     if (type === 'general') {
       // Trigger jar animation
       shakeJar();
-      
+
       // Add donation after animation starts
       setTimeout(() => {
         const newSupporter = {

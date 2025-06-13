@@ -130,8 +130,8 @@ const BlogPage = () => {
       date: "20/04/2024",
       excerpt: "Nằm ở vùng núi cao Hà Giang, trường Tiểu học Hà Giang đang thiếu thốn nghiêm trọng về cơ sở vật chất và tài liệu học tập...",
       content: "Trường Tiểu học Hà Giang tọa lạc ở vùng núi cao hẻo lánh, nơi các em học sinh phải vượt qua những con đường mòn hiểm trở để đến trường. Nhiều em phải đi bộ hàng giờ qua núi rừng để học chữ.\n\nCô Mai, giáo viên chủ nhiệm chia sẻ: 'Chúng tôi thiếu sách giáo khoa, bảng đen thì cũ kỹ, nhiều khi phải viết bằng than lên tấm gỗ. Các em rất ham học, nhưng điều kiện quá khó khăn.'\n\nTrường phục vụ 150 học sinh từ các bản làng lân cận, chủ yếu là người dân tộc H'Mông. Một ngôi trường khang trang với đầy đủ sách vở là giấc mơ lớn của cả cô và trò nơi đây.",
-      beforeImage: "https://images.unsplash.com/photo-1502675137356-2c7b409fd2f1?w=600&h=400&fit=crop",
-      afterImage: "https://images.unsplash.com/photo-1590402494682-7b8a9e9c3740?w=600&h=400&fit=crop",
+      beforeImage: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwdach9sdfx70d@resize_ss576x330",
+      afterImage: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwdach9sdfx70d@resize_ss576x330",
       updates: [
         { date: "15/04/2024", content: "Khảo sát cơ sở vật chất trường" },
         { date: "25/04/2024", content: "Thu gom sách giáo khoa cũ" },
